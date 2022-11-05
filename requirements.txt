@@ -1,0 +1,7 @@
+better-profanity
+aiohttp
+discord-py
+mysql-connector-python
+psutil
+flask
+flask-discord

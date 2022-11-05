@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Watchdog Moderation">
+    <meta name="keywords" content="Watchdog, Discord bot, Moderation Bot, Watchdog discord bot, Watchdog Discord">
+    <meta name="author" content="Watchdog">
+    <title>Watchdog - Moderation</title>
+    <link rel="icon" type="image/png" href="../static/img/favicon.png">
+
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css?v=2">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="../static/css/Footer-Basic.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="../static/css/Pretty-Footer.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="../static/css/scrollbar.css">
+</head>
+
+<body style="background-color: #26262b;">
+        <header style="background-color: #26262b;color: #ffffff;">
+        <div>
+            <nav class="navbar navbar-light navbar-expand-md">
+                <div class="container-fluid"><a class="navbar-brand" style="color: #ffffff;font-weight: bold;">Watchdog<button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler" style="border: none;"><span class="sr-only">Toggle navigation</span><i class="fa fa-th-list" style="color: rgb(255,255,255);"></i></button></a>
+                    <div class="collapse navbar-collapse" id="navcol-1">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item" role="presentation"><a class="nav-link active" href="/" style="color: #ffffff;">Home</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link active" href="/permissions" style="color: #ffffff;">Permissions</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link active" href="/commands" style="color: #ffffff;">Commands</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="https://discord.com/invite/3cEZDTw" style="color: #ffffff;" target="_blank">Support</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="https://discord.com/oauth2/authorize?client_id=702141833437773824&scope=bot&permissions=268528662" style="color: #ffffff;" target="_blank">Invite</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="https://top.gg/bot/702141833437773824/vote" style="color: #ffffff;" target="_blank">Vote</a></li>
+                        </ul>
+                    </div>
+                    {% block content %}
+                        {% if discord.authorized == False %}
+                            <a class="btn btn-primary" role="button" style="background-color: #7289DA;" href="https://discord.com/api/oauth2/authorize?client_id=701648303426764851&redirect_uri=https%3A%2F%2Fwatchdogbot.net%2Fcallback%2F&response_type=code&scope=identify%20guilds">Login&nbsp;<i class="fab fa-discord"></i></a>
+                         {% else %}
+                         <div class="row" style="margin: 0px;">
+                        <div class="col-auto" style="padding-right: 0px;padding-left: px;">
+                            <img class="rounded-circle" style="width: 30px;height: 30px;margin-top: 5px;" src="{{ user.avatar_url }}" />
+                        </div>
+                            <div class="col-auto" style="padding-left: 0px;padding-right: 0px;">
+                                <div class="dropleft" style="background-color: #00000000;color: #ffffff;padding-top: 8px;padding-right: 8px;padding-bottom: 8px;padding-left: 8px;">
+                                    <a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle" href="">{{ user.name }}</a>
+                                    <div role="menu" class="dropdown-menu" style="background-color: #33383b;color: #ffffff;">
+                                        <a role="presentation" class="dropdown-item" href="/dashboard" style="color: #ffffff">My Servers</a>
+                                        <a role="presentation" class="dropdown-item" href="/logout" style="color: #ffffff">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endblock content %}
+                </div>
+        </nav>
+
+        </div>
+    </header>
+    <div class="row" style="padding-top: 10%;padding-right: 5%;padding-bottom: 5%;margin-right: 5%;margin-left: 5%;">
+        <div class="col"><img class="img-fluid mx-auto d-block" id="displayCard" src="../static/img/Capslock.png" width="400px"></div>
+        <div class="col">
+            <h1 style="color: #ffffff;">Destroy spammer and bots with ease</h1>
+            <p style="color: #ffffff;">Watchdog is designed to protect your servers from Potentially Dangerous Files,<br>random server invites and more.</p>
+            <div class="btn-group" role="group" style="margin-top: 2%;padding-top: 2%;"><button class="btn btn-primary" type="button" style="margin-right: 2%;" onclick="switchImg(1)">Capslock</button><button class="btn btn-primary" type="button" onclick="switchImg(2)" style="margin-right: 2%;width: 120px;">Files</button><button class="btn btn-primary"
+                    type="button" onclick="switchImg(3)" style="margin-right: 2%;">Spam</button><button class="btn btn-primary" type="button" onclick="switchImg(4)" style="margin-right: 2%;">Spoilers</button><button class="btn btn-primary" type="button" onclick="switchImg(5)" style="margin-right: 2%;">Invites</button>
+                <button
+                    class="btn btn-primary" type="button" onclick="switchImg(6)" style="margin-right: 2%;">Emojis</button>
+            </div>
+            <div class="btn-group" role="group" style="margin-top: 2%;padding-top: 2%;"><button class="btn btn-primary" type="button" onclick="switchImg(7)" style="margin-right: 2%;width: 120px;">Swearing</button><button class="btn btn-primary" type="button" onclick="switchImg(8)" style="margin-right: 2%;">Mentions</button><button class="btn btn-primary"
+                    type="button" onclick="switchImg(9)" style="margin-right: 2%;width: 120px;">Mass Join</button><button class="btn btn-primary" type="button" onclick="switchImg(10)" style="margin-right: 2%;width: 165px;">Repeated Words</button></div>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 10%;margin-left: 5%;margin-right: 5%;">
+        <div class="col">
+            <h1 style="color: #ffffff;padding-top: 5%;">Keep an eye on whats happening</h1>
+            <p style="color: #ffffff;">Choose a channel where Watchdog will log actions taken both by Watchdog and your moderators so you dont miss a thing.<br><br>You can even view these logs on your dashboard!</p>
+        </div>
+        <div class="col"><img class="img-fluid mx-auto d-block" id="displayCard" src="../static/img/Capslock.png" width="400px"></div>
+    </div>
+    <div class="row" style="padding-top: 10%;margin-left: 5%;margin-right: 5%;">
+        <div class="col"><img class="img-fluid mx-auto d-block" id="displayCard" src="https://cdn.no1irishstig.co.uk/pfdn1.png" width="400px"></div>
+        <div class="col">
+            <h1 style="color: #ffffff;">Reduce the workload on your staff</h1>
+            <p style="color: #ffffff;">Define rules with Watchdog to automatically carry out a punishment of your choice<br>once someone has reached your infraction limit.</p>
+        </div>
+    </div>
+    <div style="padding-top: 5%;">
+        <h4 class="text-center" style="color: #ffffff;">Moderation Commands</h4>
+        <p class="text-center" style="color: #939393;">Moderators may run these commands incase Watchdog misses someone!<br></p>
+        <div class="row" style="padding-top: 5%;margin-right: 5%;margin-left: 5%;">
+            <div class="col" style="margin-right: 5%;margin-left: 5%;">
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">w!kick</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">Kicks a user from the server</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;">
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">w!ban</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">Bans a user from the server<br></p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;">
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">w!clear</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">Delete a given amount of messages</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;">
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">w!mute</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">Mutes a user from all channels for a given time&nbsp;</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;">
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">w!unmute</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">Unmutes a user</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;">
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">w!warn</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">Adds an infraction to a user</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;">
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">w!infractions</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">View a users infractions</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;">
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">w!infractions remove</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">Remove a infraction from a user</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;">
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">w!snipe</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">View the last deleted message in the channel</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;">
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">w!say</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">Speak as the bot</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-basic" style="background-color: transparent;height: 220px;padding: 0px;">
+        <footer style="background-image: url(&quot;../static/img/Waves.svg&quot;);background-color: transparent;background-position: bottom;height: 220px;background-repeat: repeat-x;">
+            <div class="social"></div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="https://discord.com/oauth2/authorize?client_id=702141833437773824&scope=bot&permissions=268528662" target="_blank">Invite</a></li>
+                <li class="list-inline-item"><a href="https://discord.com/invite/3cEZDTw" target="_blank">Support</a></li>
+            </ul>
+            <p class="copyright">Watchdog © 2020</p>
+        </footer>
+    </div>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/js/script.js?v=2"></script>
+</body>
+
+</html>

@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Watchdog's Dashboard">
+    <meta name="keywords" content="Watchdog, Discord bot, Moderation Bot, Watchdog discord bot, Watchdog Discord">
+    <meta name="author" content="Watchdog">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Watchdog - Dashboard</title>
+    <link rel="icon" type="image/png" href="/static/img/favicon.png">
+
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css?v=2">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="/static/css/Footer-Basic.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="/static/fonts/fontawesome-all.min.css?h=2c0fc24b3d3038317dc51c05339856d0">
+    <link rel="stylesheet" href="/static/fonts/font-awesome.min.css?h=2c0fc24b3d3038317dc51c05339856d0">
+    <link rel="stylesheet" href="/static/fonts/ionicons.min.css?h=2c0fc24b3d3038317dc51c05339856d0">
+    <link rel="stylesheet" href="/static/fonts/fontawesome5-overrides.min.css?h=2c0fc24b3d3038317dc51c05339856d0">
+    <link rel="stylesheet" href="/static/css/Pretty-Footer.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/scrollbar.css">
+    <link rel="stylesheet" href="/static/css/multiselect.css">
+</head>
+
+<body style="background-color: #34383c;">
+<header style="background-color: #26262b;color: #ffffff;">
+    <div>
+        <nav class="navbar navbar-light navbar-expand-md">
+            <div class="container-fluid"><a class="navbar-brand" style="color: #ffffff;font-weight: bold;">Watchdog
+                <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler" style="border: none;">
+                    <span class="sr-only">Toggle navigation</span><i class="fa fa-th-list"
+                                                                     style="color: rgb(255,255,255);"></i></button>
+            </a>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item" role="presentation"><a class="nav-link active" href="/"
+                                                                    style="color: #ffffff;">Home</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link active" href="./"
+                                                                    style="color: #ffffff;">Modules</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link"
+                                                                    href="https://discord.com/invite/3cEZDTw"
+                                                                    style="color: #ffffff;" target="_blank">Support</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row" style="margin: 0px;">
+                    <div class="col-auto" style="padding-right: 0px;padding-left: px;">
+                        <img class="rounded-circle" style="width: 30px;height: 30px;margin-top: 5px;"
+                             src="{{ user.avatar_url }}"/>
+                    </div>
+                    <div class="col-auto" style="padding-left: 0px;padding-right: 0px;">
+                        <div class="dropleft"
+                             style="background-color: #00000000;color: #ffffff;padding-top: 8px;padding-right: 8px;padding-bottom: 8px;padding-left: 8px;">
+                            <a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle" href="">{{ user.name
+                                }}</a>
+                            <div role="menu" class="dropdown-menu" style="background-color: #33383b;color: #ffffff;">
+                                <a role="presentation" class="dropdown-item" href="/dashboard" style="color: #ffffff">My
+                                    Servers</a>
+                                <a role="presentation" class="dropdown-item" href="/logout" style="color: #ffffff">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+{% if Page == "Moderator" %}
+<div class="row" style="padding-right: 20%;padding-top: 2%;padding-left: 20%;">
+    <div class="col" style="margin-right: 1%;">
+        <div class="row">
+            <div class="col-auto">
+                <img style="width: 50px;height: 50px;" src="/static/img/hammer.svg"/>
+            </div>
+            <div class="col" style="padding-left: 0px;">
+                <h5 style="color: #ffffff;padding-top: 10px;">MODERATOR</h5>
+            </div>
+        </div>
+        <hr style="background-color: #8b8b8b;"/>
+    </div>
+</div>
+<div class="row" style="padding-right: 20%;padding-left: 20%;">
+    <div class="col">
+        <div class="row">
+            <div class="col" style="margin-top: 1%;">
+                <h6 style="color: #ffffff;">IGNORED ROLES</h6>
+            </div>
+        </div>
+        <p style="color: #8b8b8b;">Users with these roles will not be affected by Auto Moderator</p>
+        <form method="POST" id="IgnoredRolesForm">
+        <div class="row">
+            <div class="col">
+                    <input type="hidden" name="IgnoredRoles" value=""/>
+                    <select name="IgnoredRoles" multiple id="IgnoredRolesSelect">
+                    {% for i in Roles %}
+                        {% if i in Settings['IgnoredRoles'] %}
+                            <option selected="true" value="{{ i }}">{{ Settings['IgnoredRoles'][i] }}</option>
+                        {% else %}
+                            <option value="{{ i }}">{{ Roles[i] }}</option>
+                        {% endif %}
+                    {% endfor %}
+                     </select>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary automodbtn" type="submit" style="background-color: #2b2f33;min-height: 44px;">Save</button>
+            </div>
+        </div>
+        </form>
+        <hr style="background-color: #6d6d6d;margin-top: 25px;margin-bottom: 50px;" />
+    </div>
+</div>
+<div class="row" style="padding-left: 20%;padding-right: 20%;">
+    <div class="col">
+        <div class="row">
+            <div class="col">
+                <h6 style="color: #ffffff;padding-top: 10px;">LOGGING</h6>
+            </div>
+        </div>
+        <p style="color: #8b8b8b;">You should set a channel so that any alerts can be sent there to ensure you dont
+            missing anything happening in your server while you are away</p>
+        <form method="POST" id="ChanForm">
+            <select name="ChannelSelection" id="ChannelChoice" class="automod" onchange="this.form.submit()">
+                <option value="{{ LoggingChannel }}" id="ChosenChannel">{{ ChosenChannel }}</option>
+                {% for i in Channels %}
+                {% if Channels[i] == Settings['LoggingChannel']['Channel'] %}
+                <option selected="true" value="{{ i }}">{{ Settings['LoggingChannel']['Channel'] }}</option>
+                {% else %}
+                <option value="{{ i }}">{{ Channels[i] }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </form>
+        </select>
+        <hr style="background-color: #6d6d6d;"/>
+    </div>
+</div>
+<div class="row" style="padding-left: 20%;padding-right: 20%;">
+    <div class="col">
+        <div class="row">
+            <div class="col">
+                <h6 style="color: #ffffff;padding-top: 10px;">AUTO MODERATOR</h6>
+            </div>
+        </div>
+        <p style="color: #8b8b8b;">Our Auto Moderator has 10 modules seen below. You can configure them below to do what
+            you wish.</p>
+        <div class="row" style="margin-bottom:1%;">
+            <div class="col">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col">
+                        <h6 style="color: #fff;padding-top: 10px;font-size: 15px;">Repeated Words</h6>
+                    </div>
+                    <div class="col-auto text-justify" style="padding-left: 0px;">
+                        <button class="btn btn-primary automodbtn" type="button" style="background-color: #2b2f33;" data-toggle="modal" data-target="#RepeatedModal" id="SimilarSettings">Settings</button>
+                        <div role="dialog" tabindex="-1" class="modal fade" id="RepeatedModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #26262b;color: #ffffff;">
+                                        <h4>Repeated Words</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <form method="POST" id="SimilarWordsModalForm">
+                                        <div class="modal-body" style="background-color: #26262b;color: #ffffff;">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h6 style="margin-bottom:5px;color: #ffffff;">Ratelimit (%)</h6>
+                                                    <input class="border rounded border-dark" name="SimilarWordsRatelimit" type="number" min="1" max="100" placeholder="{{ Settings['SimilarWords']['Ratelimit'] }}" style="background-color: #4b4c4d;border-color: #4b4c4d;padding-left: 5px;color: #ffffff;margin-bottom: 5%;">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col" id="SimilarWords">
+                                                    <h6 style="margin-bottom:5px;color: #ffffff;">Ignored Channels</h6>
+                                                    <select multiple name="SimilarWordsIgnored" id="SimilarSelect">
+                                                        {% for i in Channels %}
+                                                            {% if i in Settings['SimilarWords']['Ignored'] %}
+                                                                <option selected="true" value="{{ i }}">{{ Settings['SimilarWords']['Ignored'][i] }}</option>
+                                                            {% else %}
+                                                                <option value="{{ i }}">{{ Channels[i] }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer"
+                                             style="background-color: #26262b;color: #ffffff;border: inherit;">
+                                            <button class="btn btn-primary ModalOK" type="submit" style="background-color: #4b4c4d;border: hidden;">OK
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form method="POST" id="SimilarWordForm">
+                            <select class="automod" name="SimilarWordsEnabled" tabindex="0" onchange="this.form.submit()">
+                                {% if Settings['SimilarWords']['Enabled'] == 0 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option selected="true" value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['SimilarWords']['Enabled'] == 1 %}
+                                <option selected="true" value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['SimilarWords']['Enabled'] == 2 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option selected="true" value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col">
+                        <h6 style="color: #fff;padding-top: 10px;font-size: 15px;">Mentions</h6>
+                    </div>
+                    <div class="col-auto text-justify" style="padding-left: 0px;">
+                        <button class="btn btn-primary automodbtn" type="button" style="background-color: #2b2f33;" data-toggle="modal" data-target="#MentionsModal" id="MentionsSettings">Settings
+                        </button>
+                        <div role="dialog" tabindex="-1" class="modal fade" id="MentionsModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #26262b;color: #ffffff;">
+                                        <h5>Mentions</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <form method="POST" id="MentionsModalForm">
+                                        <div class="modal-body" style="background-color: #26262b;color: #ffffff;">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h6 style="margin-bottom:5px;color: #ffffff;">Ratelimit</h6>
+                                                    <input class="border rounded border-dark" name="MentionsRatelimit" type="number" min="1" max="30" placeholder="{{ Settings['Mentions']['Ratelimit'] }}" style="background-color: #4b4c4d;border-color: #4b4c4d;padding-left: 5px;color: #ffffff;margin-bottom: 5%;">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col" id="Mentions">
+                                                    <h6 style="margin-bottom:5px;color: #ffffff;">Ignored Channels</h6>
+                                                    <select multiple name="MentionsIgnored" id="MentionsSelect">
+                                                        {% for i in Channels %}
+                                                            {% if i in Settings['Mentions']['Ignored'] %}
+                                                                <option selected="true" value="{{ i }}">{{ Settings['Mentions']['Ignored'][i] }}</option>
+                                                            {% else %}
+                                                                <option value="{{ i }}">{{ Channels[i] }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer"
+                                             style="background-color: #26262b;color: #ffffff;border: inherit;">
+                                            <button class="btn btn-primary ModalOK" type="submit" style="background-color: #4b4c4d;border: hidden;">OK
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form method="POST" id="MentionsEnabled">
+                            <select class="automod" name="MentionsEnabled" tabindex="0" onchange="this.form.submit()">
+                                {% if Settings['Mentions']['Enabled'] == 0 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option selected="true" value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Mentions']['Enabled'] == 1 %}
+                                <option selected="true" value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Mentions']['Enabled'] == 2 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option selected="true" value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col">
+                        <h6 style="color: #fff;padding-top: 10px;font-size: 15px;">Capitals</h6>
+                    </div>
+                    <div class="col-auto text-justify" style="padding-left: 0px;">
+                        <button class="btn btn-primary automodbtn" type="button" style="background-color: #2b2f33;" data-toggle="modal" data-target="#CapitalsModal" id="CapitalsSettings">Settings
+                        </button>
+                        <div role="dialog" tabindex="-1" class="modal fade" id="CapitalsModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #26262b;color: #ffffff;">
+                                        <h5>Capitals</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <form method="POST" id="CapitalsModalForm">
+                                        <div class="modal-body" style="background-color: #26262b;color: #ffffff;">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h6 style="margin-bottom:5px;color: #ffffff;">Ratelimit (%)</h6>
+                                                    <input class="border rounded border-dark" name="CapitalsRatelimit" type="number" min="1" max="100" placeholder="{{ Settings['Capitals']['Ratelimit'] }}" style="background-color: #4b4c4d;border-color: #4b4c4d;padding-left: 5px;color: #ffffff;margin-bottom: 5%;">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col" id="Capitals">
+                                                    <h6 style="margin-bottom:5px;color: #ffffff;">Ignored Channels</h6>
+                                                    <select multiple name="CapitalsIgnored" id="CapitalsSelect">
+                                                        {% for i in Channels %}
+                                                            {% if i in Settings['Capitals']['Ignored'] %}
+                                                                <option selected="true" value="{{ i }}">{{ Settings['Capitals']['Ignored'][i] }}</option>
+                                                            {% else %}
+                                                                <option value="{{ i }}">{{ Channels[i] }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer"
+                                             style="background-color: #26262b;color: #ffffff;border: inherit;">
+                                            <button class="btn btn-primary ModalOK" type="submit" style="background-color: #4b4c4d;border: hidden;">OK
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form method="POST" id="CapitalsEnabled">
+                            <select class="automod" name="CapitalsEnabled" tabindex="0" onchange="this.form.submit()">
+                                {% if Settings['Capitals']['Enabled'] == 0 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option selected="true" value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Capitals']['Enabled'] == 1 %}
+                                <option selected="true" value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Capitals']['Enabled'] == 2 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option selected="true" value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom:1%;">
+            <div class="col">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col">
+                        <h6 style="color: #fff;padding-top: 10px;font-size: 15px;">Emojis</h6>
+                    </div>
+                    <div class="col-auto text-justify" style="padding-left: 0px;">
+                        <button class="btn btn-primary automodbtn" type="button" style="background-color: #2b2f33;" data-toggle="modal" data-target="#EmojisModal" id="EmojisSettings">Settings
+                        </button>
+                        <div role="dialog" tabindex="-1" class="modal fade" id="EmojisModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #26262b;color: #ffffff;">
+                                        <h5>Emojis</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <form method="POST" id="EmojisModalForm">
+                                        <div class="modal-body" style="background-color: #26262b;color: #ffffff;">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h6 style="margin-bottom:5px;color: #ffffff;">Ratelimit</h6>
+                                                    <input class="border rounded border-dark" name="EmojisRatelimit" type="number" min="1" max="30" placeholder="{{ Settings['Emojis']['Ratelimit'] }}" style="background-color: #4b4c4d;border-color: #4b4c4d;padding-left: 5px;color: #ffffff;margin-bottom: 5%;">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col" id="Emojis">
+                                                    <h6 style="margin-bottom:5px;color: #ffffff;">Ignored Channels</h6>
+                                                    <select multiple name="EmojisIgnored" id="EmojisSelect">
+                                                        {% for i in Channels %}
+                                                            {% if i in Settings['Emojis']['Ignored'] %}
+                                                                <option selected="true" value="{{ i }}">{{ Settings['Emojis']['Ignored'][i] }}</option>
+                                                            {% else %}
+                                                                <option value="{{ i }}">{{ Channels[i] }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer"
+                                             style="background-color: #26262b;color: #ffffff;border: inherit;">
+                                            <button class="btn btn-primary ModalOK" type="submit" style="background-color: #4b4c4d;border: hidden;">OK
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form method="POST" id="EmojisEnabled">
+                            <select class="automod" name="EmojisEnabled" tabindex="0" onchange="this.form.submit()">
+                                {% if Settings['Emojis']['Enabled'] == 0 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option selected="true" value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Emojis']['Enabled'] == 1 %}
+                                <option selected="true" value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Emojis']['Enabled'] == 2 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option selected="true" value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col">
+                        <h6 style="color: #fff;padding-top: 10px;font-size: 15px;">Server Invites</h6>
+                    </div>
+                    <div class="col-auto text-justify" style="padding-left: 0px;">
+                        <button class="btn btn-primary automodbtn" type="button" style="background-color: #2b2f33;" data-toggle="modal" data-target="#InvitesModal" id="InvitesSettings">Settings
+                        </button>
+                        <div role="dialog" tabindex="-1" class="modal fade" id="InvitesModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #26262b;color: #ffffff;">
+                                        <h5>Server Invites</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <form method="POST" id="InvitesModalForm">
+                                        <div class="modal-body" style="background-color: #26262b;color: #ffffff;">
+                                            <div class="row">
+                                                <div class="col" id="Invites">
+                                                    <h6 style="margin-bottom:5px;color: #ffffff;">Ignored Channels</h6>
+                                                    <select multiple name="InvitesIgnored" id="InvitesSelect">
+                                                        {% for i in Channels %}
+                                                            {% if i in Settings['Invites']['Ignored'] %}
+                                                                <option selected="true" value="{{ i }}">{{ Settings['Invites']['Ignored'][i] }}</option>
+                                                            {% else %}
+                                                                <option value="{{ i }}">{{ Channels[i] }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer"
+                                             style="background-color: #26262b;color: #ffffff;border: inherit;">
+                                            <button class="btn btn-primary ModalOK" type="submit" style="background-color: #4b4c4d;border: hidden;">OK
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form method="POST" id="InvitesEnabled">
+                            <select class="automod" name="InvitesEnabled" tabindex="0" onchange="this.form.submit()">
+                                {% if Settings['Invites']['Enabled'] == 0 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option selected="true" value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Invites']['Enabled'] == 1 %}
+                                <option selected="true" value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Invites']['Enabled'] == 2 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option selected="true" value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col">
+                        <h6 style="color: #fff;padding-top: 10px;font-size: 15px;">Mass Join</h6>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <form method="POST" id="JoinsEnabled">
+                            <select class="automod" name="JoinsEnabled" tabindex="0" onchange="this.form.submit()">
+                                {% if Settings['Joins']['Enabled'] == 0 %}
+                                <option value="1">Send Alerts</option>
+                                <option value="2">Send Alerts and Kick</option>
+                                <option selected="true" value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Joins']['Enabled'] == 1 %}
+                                <option selected="true" value="1">Send Alerts</option>
+                                <option value="2">Send Alerts and Kick</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Joins']['Enabled'] == 2 %}
+                                <option value="1">Send Alerts</option>
+                                <option selected="true" value="2">Send Alerts and Kick</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom:1%;">
+            <div class="col">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col">
+                        <h6 style="color: #fff;padding-top: 10px;font-size: 15px;">Swearing</h6>
+                    </div>
+                    <div class="col-auto text-justify" style="padding-left: 0px;">
+                        <button class="btn btn-primary automodbtn" type="button" style="background-color: #2b2f33;" data-toggle="modal" data-target="#SwearingModal" id="SwearingSettings">Settings
+                        </button>
+                        <div role="dialog" tabindex="-1" class="modal fade" id="SwearingModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #26262b;color: #ffffff;">
+                                        <h5>Swearing</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <form method="POST" id="SwearingModalForm">
+                                        <div class="modal-body" style="background-color: #26262b;color: #ffffff;">
+                                            <div class="row">
+                                                <div class="col" id="Swearing">
+                                                    <h6 style="margin-bottom:5px;color: #ffffff;">Ignored Channels</h6>
+                                                    <select multiple name="SwearingIgnored" id="SwearingSelect">
+                                                        {% for i in Channels %}
+                                                            {% if i in Settings['Swearing']['Ignored'] %}
+                                                                <option selected="true" value="{{ i }}">{{ Settings['Swearing']['Ignored'][i] }}</option>
+                                                            {% else %}
+                                                                <option value="{{ i }}">{{ Channels[i] }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer"
+                                             style="background-color: #26262b;color: #ffffff;border: inherit;">
+                                            <button class="btn btn-primary ModalOK" type="submit" style="background-color: #4b4c4d;border: hidden;">OK
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form method="POST" id="SwearingEnabled">
+                            <select class="automod" name="SwearingEnabled" tabindex="0" onchange="this.form.submit()">
+                                {% if Settings['Swearing']['Enabled'] == 0 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option selected="true" value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Swearing']['Enabled'] == 1 %}
+                                <option selected="true" value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Swearing']['Enabled'] == 2 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option selected="true" value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col">
+                        <h6 style="color: #fff;padding-top: 10px;font-size: 15px;">Spam</h6>
+                    </div>
+                    <div class="col-auto text-justify" style="padding-left: 0px;">
+                        <button class="btn btn-primary automodbtn" type="button" style="background-color: #2b2f33;" data-toggle="modal" data-target="#SpamModal" id="SpamSettings">Settings
+                        </button>
+                        <div role="dialog" tabindex="-1" class="modal fade" id="SpamModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #26262b;color: #ffffff;">
+                                        <h5>Spam</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <form method="POST" id="SpamModalForm">
+                                        <div class="modal-body" style="background-color: #26262b;color: #ffffff;">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h6 style="margin-bottom:5px;color: #ffffff;">Ratelimit</h6>
+                                                    <input class="border rounded border-dark" name="SpamRatelimit" type="number" min="1" max="30" placeholder="{{ Settings['Mentions']['Ratelimit'] }}" style="background-color: #4b4c4d;border-color: #4b4c4d;padding-left: 5px;color: #ffffff;margin-bottom: 5%;">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col" id="Spam">
+                                                    <h6 style="margin-bottom:5px;color: #ffffff;">Ignored Channels</h6>
+                                                    <select multiple name="SpamIgnored" id="SpamSelect">
+                                                        {% for i in Channels %}
+                                                            {% if i in Settings['Spam']['Ignored'] %}
+                                                                <option selected="true" value="{{ i }}">{{ Settings['Spam']['Ignored'][i] }}</option>
+                                                            {% else %}
+                                                                <option value="{{ i }}">{{ Channels[i] }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer"
+                                             style="background-color: #26262b;color: #ffffff;border: inherit;">
+                                            <button class="btn btn-primary ModalOK" type="submit" style="background-color: #4b4c4d;border: hidden;">OK
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form method="POST" id="SpamEnabled">
+                            <select class="automod" name="SpamEnabled" tabindex="0" onchange="this.form.submit()">
+                                {% if Settings['Spam']['Enabled'] == 0 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option selected="true" value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Spam']['Enabled'] == 1 %}
+                                <option selected="true" value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Spam']['Enabled'] == 2 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option selected="true" value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col">
+                        <h6 style="color: #fff;padding-top: 10px;font-size: 15px;">File Extensions</h6>
+                    </div>
+                    <div class="col-auto text-justify" style="padding-left: 0px;">
+                        <button class="btn btn-primary automodbtn" type="button" style="background-color: #2b2f33;" data-toggle="modal" data-target="#FilesModal" id="FilesSettings">Settings
+                        </button>
+                        <div role="dialog" tabindex="-1" class="modal fade" id="FilesModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #26262b;color: #ffffff;">
+                                        <h5>File Extensions</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <form method="POST" id="FilesModalForm">
+                                        <div class="modal-body" style="background-color: #26262b;color: #ffffff;">
+                                            <div class="row">
+                                                <div class="col" id="Files">
+                                                    <h6 style="margin-bottom:5px;color: #ffffff;">Ignored Channels</h6>
+                                                    <select multiple name="FilesIgnored" id="FilesSelect">
+                                                        {% for i in Channels %}
+                                                            {% if i in Settings['Files']['Ignored'] %}
+                                                                <option selected="true" value="{{ i }}">{{ Settings['Files']['Ignored'][i] }}</option>
+                                                            {% else %}
+                                                                <option value="{{ i }}">{{ Channels[i] }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer"
+                                             style="background-color: #26262b;color: #ffffff;border: inherit;">
+                                            <button class="btn btn-primary ModalOK" type="submit" style="background-color: #4b4c4d;border: hidden;">OK
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form method="POST" id="FilesEnabled">
+                            <select class="automod" name="FilesEnabled" tabindex="0" onchange="this.form.submit()">
+                                {% if Settings['Files']['Enabled'] == 0 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option selected="true" value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Files']['Enabled'] == 1 %}
+                                <option selected="true" value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Files']['Enabled'] == 2 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option selected="true" value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col">
+                        <h6 style="color: #fff;padding-top: 10px;font-size: 15px;">Spoilers</h6>
+                    </div>
+                    <div class="col-auto text-justify" style="padding-left: 0px;">
+                        <button class="btn btn-primary automodbtn" type="button" style="background-color: #2b2f33;" data-toggle="modal" data-target="#SpoilersModal" id="SpoilersSettings">Settings
+                        </button>
+                        <div role="dialog" tabindex="-1" class="modal fade" id="SpoilersModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #26262b;color: #ffffff;">
+                                        <h5>Spoilers</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <form method="POST" id="SpoilersModalForm">
+                                        <div class="modal-body" style="background-color: #26262b;color: #ffffff;">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h6 style="margin-bottom:5px;color: #ffffff;">Ratelimit</h6>
+                                                    <input class="border rounded border-dark" name="SpoilersRatelimit" type="number" min="1" max="30" placeholder="{{ Settings['Spoilers']['Ratelimit'] }}" style="background-color: #4b4c4d;border-color: #4b4c4d;padding-left: 5px;color: #ffffff;margin-bottom: 5%;">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col" id="Spoilers">
+                                                    <h6 style="margin-bottom:5px;color: #ffffff;">Ignored Channels</h6>
+                                                    <select multiple name="SpoilersIgnored" id="SpoilersSelect">
+                                                        {% for i in Channels %}
+                                                            {% if i in Settings['Spoilers']['Ignored'] %}
+                                                                <option selected="true" value="{{ i }}">{{ Settings['Spoilers']['Ignored'][i] }}</option>
+                                                            {% else %}
+                                                                <option value="{{ i }}">{{ Channels[i] }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer"
+                                             style="background-color: #26262b;color: #ffffff;border: inherit;">
+                                            <button class="btn btn-primary ModalOK" type="submit" style="background-color: #4b4c4d;border: hidden;">OK
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form method="POST" id="SpoilersEnabled">
+                            <select class="automod" name="SpoilersEnabled" tabindex="0" onchange="this.form.submit()">
+                                {% if Settings['Spoilers']['Enabled'] == 0 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option selected="true" value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Spoilers']['Enabled'] == 1 %}
+                                <option selected="true" value="1">Delete Message and Warn</option>
+                                <option value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                                {% if Settings['Spoilers']['Enabled'] == 2 %}
+                                <option value="1">Delete Message and Warn</option>
+                                <option selected="true" value="2">Delete Message</option>
+                                <option value="0">Disabled</option>
+                                {% endif %}
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col"> </div>
+            <div class="col"> </div>
+        </div>
+        <hr style="background-color: #6d6d6d;"/>
+    </div>
+</div>
+<div class="row" style="padding-right: 20%;padding-left: 20%;">
+    <div class="col">
+        <h6 style="color: #ffffff;padding-top: 10px;">AUTOMATED ACTIONS</h6>
+        <p style="color: #8b8b8b;">These will allow for you to allow Watchdog to mute, kick or ban users automatically.</p>
+        <form method="POST" id="RulesForm">
+            <div class="row justify-content-center" style="border-radius: 5px;border: solid;border-width: 1px;border-color: #1a1a1a;background-color: #2b2f33;margin-right: 0px;margin-left: 0px;">
+                <div class="col-auto">
+                    <select name="Type" class="form-control custom-select" style="color: #fff;background-color: #2b2f33;border-color: #1a1a1a;margin-top: 10px;margin-bottom: 10px;">
+                        <option value="1">Mute</option>
+                        <option value="2">Kick</option>
+                        <option value="3">Ban</option>
+                    </select>
+                </div>
+                <div class="col-auto" style="padding-left: 0px;">
+                    <p style="color: #ffffff;margin-top: 15px;">when someone has</p>
+                </div>
+                <div class="col-auto" style="padding: 0px;">
+                    <input type="number" name="Infractions" class="form-control" required min="1" max="100" placeholder="3" style="width: 75px;margin-top: 10px;" /></div>
+                <div class="col-auto">
+                    <p style="color: #ffffff;margin-top: 15px;">infractions in the last</p>
+                </div>
+                <div class="col-auto" style="padding: 0px;">
+                    <input type="number" name="Length" class="form-control" placeholder="30" style="width: 75px;margin-top: 10px;" /></div>
+                <div class="col-auto" style="padding-right: 0px;">
+                    <select name="Increment" class="form-control custom-select" style="color: #fff;border-color: #1a1a1a;background-color: #2b2f33;margin-top: 10px;">
+                        <option value="1">minute(s)</option>
+                        <option value="2">hour(s)</option>
+                        <option value="3">day(s)</option>
+                    </select>
+                </div>
+                <div class="col-auto"><button class="btn btn-primary" type="submit" style="margin-top: 10px;background-color: #27b1db;">Add</button></div>
+            </div>
+        </form>
+        {% if Rules %}
+            <hr style="background-color: #6d6d6d;margin-top: 25px;" />
+        {% endif %}
+        {% for i in Rules %}
+        <div class="row justify-content-center" style="border-radius: 5px;border: solid;border-width: 1px;border-color: #1a1a1a;background-color: #2b2f33;margin-right: 0px;margin-left: 0px;margin-top: 2%;">
+            <div class="col-auto">
+                {% if i[0] == 1 %}
+                <select class="form-control custom-select" style="background-color: #2b2f33;border-color: #1a1a1a;margin-top: 10px;margin-bottom: 10px;" disabled><option value="1">Mute</option></select>
+                {% endif %}
+                {% if i[0] == 2 %}
+                <select class="form-control custom-select" style="background-color: #2b2f33;border-color: #1a1a1a;margin-top: 10px;margin-bottom: 10px;" disabled><option value="2">Kick</option></select>
+                {% endif %}
+                {% if i[0] == 3 %}
+                <select class="form-control custom-select" style="background-color: #2b2f33;border-color: #1a1a1a;margin-top: 10px;margin-bottom: 10px;" disabled><option value="3">Ban</option></select>
+                {% endif %}
+            </div>
+            <div class="col-auto" style="padding-left: 0px;">
+                <p style="color: #ffffff;margin-top: 15px;">when someone has</p>
+            </div>
+            <div class="col-auto" style="padding: 0px;"><input type="number" class="form-control" required min="1" max="100" placeholder="{{i[1]}}" style="width: 75px;margin-top: 10px;" disabled /></div>
+            <div class="col-auto">
+                <p style="color: #ffffff;margin-top: 15px;">infractions in the last</p>
+            </div>
+            <div class="col-auto" style="padding: 0px;"><input type="number" class="form-control" placeholder="{{i[2]}}" style="width: 75px;margin-top: 10px;" disabled /></div>
+            <div class="col-auto" style="padding-right: 0px;">
+                {% if i[3] == 1 %}
+                <select class="form-control custom-select" style="background-color: #2b2f33;border-color: #1a1a1a;margin-top: 10px;margin-bottom: 10px;" disabled><option value="1">minute(s)</option></select>
+                {% endif %}
+                {% if i[3] == 2 %}
+                <select class="form-control custom-select" style="background-color: #2b2f33;border-color: #1a1a1a;margin-top: 10px;margin-bottom: 10px;" disabled><option value="2">hour(s)</option></select>
+                {% endif %}
+                {% if i[3] == 3 %}
+                <select class="form-control custom-select" style="background-color: #2b2f33;border-color: #1a1a1a;margin-top: 10px;margin-bottom: 10px;" disabled><option value="3">day(s)</option></select>
+                {% endif %}
+            </div>
+            <div class="col-auto">
+                <form method="POST" id="RemoveRule">
+                    <button class="btn btn-primary" name="RuleToDelete" value="{{i[0]}}" type="submit" style="margin-top: 10px;background-color: #db3227;">Remove</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        <hr style="background-color: #6d6d6d;margin-top: 25px;margin-bottom:250px;" />
+    </div>
+</div>
+{% endif %}
+
+{% if Page == "Modules" %}
+<div class="row" style="padding-top: 2%;padding-right: 15%;padding-left: 15%;">
+    <div class="col module-select" style="margin-right: 1%;" onclick="location.href=&#39;moderator&#39;">
+        <div class="row">
+            <div class="col-auto module-icon"><img class="module-icon" style="width: 40px;height: 40px;margin-top: 10px;" src="/static/img/hammer.svg" /></div>
+            <div class="col">
+                <h5 style="color: #ffffff;padding-top: 1%;">Moderator</h5>
+                <p style="color: #8b8b8b;">Protect your servers with moderation commands and automation!</p>
+            </div>
+        </div>
+    </div>
+    <div class="col module-select" style="margin-right: 1%;" onclick="location.href=&#39;logs&#39;">
+        <div class="row">
+            <div class="col-auto module-icon"><img class="module-icon" style="width: 40px;height: 40px;margin-top: 3px;" src="/static/img/Logs.svg" /></div>
+            <div class="col">
+                <h5 style="color: #ffffff;padding-top: 1%;">Logs</h5>
+                <p style="color: #8b8b8b;">View your servers logs online!</p>
+            </div>
+        </div>
+    </div>
+    <div class="col module-select" style="margin-right: 1%;" onclick="location.href=&#39;settings&#39;">
+        <div class="row">
+            <div class="col-auto module-icon"><img class="module-icon" style="width: 40px;height: 40px;margin-top: 3px;" src="/static/img/Settings.svg" /></div>
+            <div class="col">
+                <h5 style="color: #ffffff;">Settings</h5>
+                <p style="color: #8b8b8b;">Change essential features for your guild!</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if Page == "Settings" %}
+<div class="row" style="padding-top: 2%;padding-left: 20%;padding-right: 20%;">
+    <div class="col" style>
+        <div class="row">
+            <div class="col-auto"><img style="width: 50px;height: 50px;" src="/static/img/Settings.svg" /></div>
+            <div class="col" style="padding-left: 0px;padding-right: 0px;">
+                <h5 style="color: #ffffff;padding-top: 10px;">Settings</h5>
+            </div>
+        </div>
+        <hr style="background-color: #6d6d6d;" />
+    </div>
+</div>
+<div class="row" style="padding-left: 20%;padding-right: 20%;">
+    <div class="col">
+        <div class="row">
+            <div class="col">
+                <h6 style="color: #ffffff;padding-top: 10px;">Prefix</h6>
+            </div>
+        </div>
+        <p style="color: #8b8b8b;">Change the prefix to all commands</p>
+        <form method="POST" id="PrefixForm">
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="settings-input" name="PrefixChoice" placeholder="{{ Prefix }}" maxlength="=6" minlength="1"/>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary automodbtn" type="submit" style="min-height: 44px;background-color: #2b2f33;">Save</button>
+                </div>
+            </div>
+        </form>
+        <hr style="background-color: #6d6d6d;" />
+    </div>
+</div>
+<div class="row" style="padding-left: 20%;padding-right: 20%;">
+    <div class="col">
+        <div class="row">
+            <div class="col">
+                <h6 style="color: #ffffff;padding-top: 10px;">Language</h6>
+            </div>
+        </div>
+        <p style="color: #8b8b8b;">Change the language of all bot messages</p>
+        <form method="POST" id="LangForm">
+            <select name="LanguageSelection" id="LanguageChoice" class="automod" onchange="this.form.submit()">
+                <option value="{{ LoggingChannel }}" id="ChosenLanguage">{{ Language }}</option>
+                {% for i in AvailableLanguages %}
+                    <option value="{{ i }}">{{ AvailableLanguages[i] }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+{% if Page == "Logs" %}
+<div class="row" style="padding-top: 2%;padding-left: 20%;padding-right: 20%;">
+    <div class="col" style>
+        <div class="row">
+            <div class="col-auto"><img style="width: 50px;height: 50px;" src="/static/img/Logs.svg" /></div>
+            <div class="col" style="padding-left: 0px;padding-right: 0px;">
+                <h5 style="color: #ffffff;padding-top: 10px;">Web Logs</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="padding-left: 20%;padding-right: 20%;">
+    <div class="col">
+        <div class="table-responsive" style="margin-top: 1%;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="color: #ffffff;">Action</th>
+                        <th style="color: #ffffff;">Log</th>
+                        <th style="color: #ffffff;">Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for log in Logs %}
+                    <tr>
+                        <td class="text-center" style="color: #ffffff;">{{ log[0] }}</td>
+                        <td style="color: #ffffff;">{{ log[1] }}</td>
+                        <td style="color: #ffffff;">{{ log[2] }}</td>
+                    </tr>
+                {% endfor %}
+                    <tr></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<script>
+        if ( window.history.replaceState ) {
+          window.history.replaceState( null, null, window.location.href );
+        }
+
+</script>
+
+<script src="/static/js/jquery.min.js?v=2"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/js/bs-init.js"></script>
+<script src="/static/js/script.js"></script>
+<script src="/static/js/multiselect.js?v=4"></script>
+</body>
+
+</html>

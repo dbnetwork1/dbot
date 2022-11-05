@@ -1,0 +1,169 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Watchdog's Help">
+    <meta name="keywords" content="Watchdog, Discord bot, Moderation Bot, Watchdog discord bot, Watchdog Discord">
+    <meta name="author" content="Watchdog">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Watchdog - Settings</title>
+    <link rel="icon" type="image/png" href="../../static/img/favicon.png">
+
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css?v=2">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="../static/css/Footer-Basic.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="../static/css/Pretty-Footer.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="../static/css/scrollbar.css">
+</head>
+
+<body style="background-color: #26262b;">
+    <header style="background-color: #26262b;color: #ffffff;">
+        <div>
+            <nav class="navbar navbar-light navbar-expand-md">
+                <div class="container-fluid"><a class="navbar-brand" style="color: #ffffff;font-weight: bold;">Watchdog</a><button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                    <div
+                        class="collapse navbar-collapse" id="navcol-1">
+                        <ul class="nav navbar-nav">
+                             <li class="nav-item" role="presentation"><a class="nav-link active" href="/" style="color: #ffffff;">Home</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="https://discord.com/invite/3cEZDTw" style="color: #ffffff;" target="_blank">Support</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="https://discord.com/oauth2/authorize?client_id=702141833437773824&scope=bot&permissions=268528662" style="color: #ffffff;" target="_blank">Invite</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="https://top.gg/bot/702141833437773824/vote" style="color: #ffffff;" target="_blank">Vote</a></li>
+                        </ul>
+                </div>
+                    {% block content %}
+                        {% if discord.authorized == False %}
+                            <a class="btn btn-primary" role="button" style="background-color: #7289DA;" href="https://discord.com/api/oauth2/authorize?client_id=701648303426764851&redirect_uri=https%3A%2F%2Fwatchdogbot.net%2Fcallback%2F&response_type=code&scope=identify%20guilds">Login&nbsp;<i class="fab fa-discord"></i></a>
+                         {% else %}
+                        <div class="row" style="margin: 0px;">
+                            <div class="col-auto" style="padding-right: 0px;padding-left: px;">
+                                <img class="rounded-circle" style="width: 30px;height: 30px;margin-top: 5px;" src="{{ user.avatar_url }}" />
+                            </div>
+                            <div class="col-auto" style="padding-left: 0px;padding-right: 0px;">
+                                <div class="dropleft" style="background-color: #00000000;color: #ffffff;padding-top: 8px;padding-right: 8px;padding-bottom: 8px;padding-left: 8px;">
+                                    <a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle" href="">{{ user.name }}</a>
+                                    <div role="menu" class="dropdown-menu" style="background-color: #33383b;color: #ffffff;">
+                                        <a role="presentation" class="dropdown-item" href="/dashboard" style="color: #ffffff">My Servers</a>
+                                        <a role="presentation" class="dropdown-item" href="/logout" style="color: #ffffff">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endblock content %}
+                </div>
+        </nav>
+        </div>
+    </header>
+    <div style="padding-top: 5%;">
+        <h4 class="text-center" style="color: #ffffff;">Thank you for choosing Watchdog</h4>
+        <p class="text-center" style="color: #939393;">There are many large bots out there for the same purpose as Watchdog. But we hope<br />our accessability features and reliability will be enough to grow a small user base.<br /><br />This page is designed for anyone new who is using Watchdog.
+            Some of the settings<br />might be confusing, or you dont know what to set them to. This page will explain everything.<br /></p>
+        <div class="row" style="padding-top: 0;margin-right: 5%;margin-left: 5%;margin-top: 5%;">
+            <div class="col" style="margin-right: 5%;margin-left: 5%;">
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">Ratelimit</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;">The ratelimit is the required amount of offences to trigger the system</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;" />
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">Weblog Type</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;">We store our logs with a few types. below you can see what they all mean.</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;" />
+                <h4 class="text-center" style="color: #ffffff;margin-top: 2%;margin-bottom: 2%;">Here are some recommended settings.</h4>
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">Similar Words</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">~70%</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;" />
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">Mentions</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">~5</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;" />
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">Capitals</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">~70%</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;" />
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">Emotes</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">8~</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;" />
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">Joins</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">3~</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;" />
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">Spam</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">Depends, 7 - 12 <br /></p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;" />
+                <div class="row">
+                    <div class="col" style="margin-left: 5%;margin-right: 5%;">
+                        <p style="color: #ffffff;width: 50%;">Spoilers</p>
+                    </div>
+                    <div class="col">
+                        <p style="color: #ffffff;width: 50%;">5~</p>
+                    </div>
+                </div>
+                <hr style="background-color: #939393;width: 92%;" />
+                <p class="text-center" style="color: #939393;">Without revealing the secrets behind our systems most of our features are measured overtime. The measured <br />elements are reset at a static ratemeaning that only we can change it. This duration is between 5 - 10 seconds.<br /><br />Incase
+                    you were wondering what the &#39;Type&#39; numbers in Weblogs refer too. Heres an index.<br /><br />1: Guild Join<br />2: Guild Leave<br />3: Prefix Change<br />4: Mute &amp; Unmute<br />5: Warning Added / Removed<br />6: All Guild
+                    warnings erased<br />7: Kick<br />8: Ban<br />9: Auto Moderator<br /><br />~ Means approximately.</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-basic" style="background-color: transparent;height: 220px;padding: 0px;">
+        <footer style="background-image: url('Waves.svg');background-color: transparent;background-position: bottom;height: 220px;background-repeat: repeat-x;">
+            <div class="social"></div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="https://invite.watchdogbot.xyz" target="_blank">Invite</a></li>
+                <li class="list-inline-item"><a href="https://support.watchdogbot.xyz" target="_blank">Support</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+            </ul>
+            <p class="copyright">Watchdog © 2020</p>
+        </footer>
+    </div>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/js/script.js?v=2"></script>
+</body>
+
+</html>
